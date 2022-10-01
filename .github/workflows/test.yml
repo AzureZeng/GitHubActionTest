@@ -4,6 +4,7 @@ on: [push]
 jobs:
   test_job:
     runs-on: ubuntu-22.04
+    name: Test Job
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -12,5 +13,8 @@ jobs:
           dotnet-version: '6.0.401'
       - name: Build Artifacts
         run: dotnet build
-      - name: Run Artifact
-        run: dotnet ./artifacts/bin/MyConsoleApp/Debug/MyConsoleApp.dll
+      - name: Save Build Data
+        uses: actions/upload-artifact@v3
+        with:
+          name: my-artifact
+          path: path/to/artifact/world.txt
