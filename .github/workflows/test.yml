@@ -5,6 +5,12 @@ jobs:
   test_job:
     runs-on: ubuntu-22.04
     steps:
-      - name: Test Step
-        shell: pwsh
-        run: Write-Output "It is"
+      - name: Checkout
+        uses: actions/checkout@v3
+      - uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '6.0.401'
+      - name: Build Artifacts
+        run: dotnet build
+      - name: Run Artifact
+        run: dotnet ./artifacts/bin/MyConsoleApp/Debug/MyConsoleApp.dll

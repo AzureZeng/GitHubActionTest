@@ -1,0 +1,9 @@
+<Project>
+    <PropertyGroup>
+        <BaseOutputPath>../../artifacts/bin/$(MSBuildProjectName)</BaseOutputPath>
+        <BaseIntermediateOutputPath>../../artifacts/obj/$(MSBuildProjectName)</BaseIntermediateOutputPath>
+        <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+        <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+        <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
+    </PropertyGroup>
+</Project>
