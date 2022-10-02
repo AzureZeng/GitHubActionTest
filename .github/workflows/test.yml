@@ -2,19 +2,8 @@ name: test-workflow
 run-name: Test Workflow
 on: [push]
 jobs:
-  test_job:
+  os-test:
     runs-on: ubuntu-22.04
-    name: Test Job
+    container: rockylinux:9.0
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-      - uses: actions/setup-dotnet@v3
-        with:
-          dotnet-version: '6.0.401'
-      - name: Build Artifacts
-        run: dotnet build -c Release
-      - name: Save Build Data
-        uses: actions/upload-artifact@v3
-        with:
-          name: my-artifact
-          path: ./artifacts/bin/MyConsoleApp/Release
+      - run: cat /etc/os-release
