@@ -14,8 +14,9 @@ jobs:
           registry: registry.us-west-1.aliyuncs.com
           username: ${{ secrets.ALIYUN_ACR_USERNAME }}
           password: ${{ secrets.ALIYUN_ACR_PASSWORD }}
-      - name: Setup dotnet 6
-        run: dnf install dotnet-sdk-6.0 -y
+      - uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '6.0.x'
       - name: Build Artifacts
         run: dotnet build -c Release
       - name: Save Build Data
