@@ -10,7 +10,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Setup dotnet 6
-        run: dnf install dotnet-sdk-6.0
+        run: dnf install dotnet-sdk-6.0 -y
       - name: Build Artifacts
         run: dotnet build -c Release
       - name: Save Build Data
