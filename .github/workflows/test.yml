@@ -4,7 +4,6 @@ on: [push]
 jobs:
   test_job:
     runs-on: ubuntu-22.04
-    container: rockylinux:9.0
     name: Test Job
     steps:
       - name: Checkout
