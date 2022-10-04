@@ -1,6 +1,9 @@
 name: test-workflow
 run-name: Test Workflow
-on: [push]
+on: 
+  push:
+    tags:
+      - v*
 jobs:
   test_job:
     runs-on: ubuntu-22.04
@@ -14,14 +17,24 @@ jobs:
           registry: registry.us-west-1.aliyuncs.com
           username: ${{ secrets.ALIYUN_ACR_USERNAME }}
           password: ${{ secrets.ALIYUN_ACR_PASSWORD }}
+      - name: Docker meta
+        id: meta
+        uses: docker/metadata-action@v4
+        with:
+          images: registry.us-west-1.aliyuncs.com/azw-priv/test-build
+          tags: |
+            type=semver,pattern={{version}}
       - uses: actions/setup-dotnet@v3
         with:
           dotnet-version: '6.0.x'
       - name: Build Artifacts
         run: dotnet build -c Release
-      - name: Save Build Data
-        uses: actions/upload-artifact@v3
+      - name: Build and push
+        uses: docker/build-push-action@v3
         with:
-          name: my-artifact
-          path: ./artifacts/bin/MyConsoleApp/Release
+          context: .
+          file: src/MyConsoleApp/Dockerfile_Artifact
+          push: ${{ github.event_name != 'pull_request' }}
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
     
