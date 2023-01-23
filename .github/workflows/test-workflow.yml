@@ -9,4 +9,4 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Test
-        run: apt install gettext && type xgettext
+        run: sudo apt install gettext -y && type xgettext
