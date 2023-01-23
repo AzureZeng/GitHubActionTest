@@ -28,4 +28,4 @@ jobs:
           file: Dockerfile
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ vars.IMAGE_VERSION }}
-          labels: ghcr.io/AzureZeng/test-image:${{ vars.IMAGE_VERSION }}
+          labels: ghcr.io/AzureZeng/test-image:${{ env.IMAGE_VERSION }}
